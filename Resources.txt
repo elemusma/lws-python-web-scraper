@@ -1,3 +1,7 @@
 Videos watched:
 https://www.youtube.com/watch?v=hzg8UAct-ww - NOT HELPFUL
 https://www.youtube.com/watch?v=YbGAUEjTKg4
+https://www.youtube.com/watch?v=CHUxmVVH2AQ - NOT HELPFUL
+
+Documentation:
+https://selenium-python.readthedocs.io/api.html

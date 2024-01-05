@@ -2,6 +2,37 @@ import time
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
+
+
+def finding_name_field():
+    # Find the input fields by ID
+    label_text_first = "First Name"
+    label_text_full = "Full Name"
+    label_text = "Name"
+    print("label_text success")
+
+    try:
+        label_element = driver.find_element(
+            By.XPATH, f'//*[text()="{label_text_first}"]'
+        )
+    except NoSuchElementException:
+        try:
+            label_element = driver.find_element(
+                By.XPATH, f'//*[text()="{label_text_full}"]'
+            )
+        except NoSuchElementException:
+            try:
+                label_element = driver.find_element(
+                    By.XPATH, f'//*[text()="{label_text}"]'
+                )
+            except NoSuchElementException:
+                print(
+                    f"All three variations of label text '{label_text_first}' and '{label_text}' not found."
+                )
+    # Handle the case when both variations are not found
+
+    print("label_element success")
 
 
 def fill_contact_form(base_url, contact_path, name_value, email_value, message_value):
@@ -22,11 +53,9 @@ def fill_contact_form(base_url, contact_path, name_value, email_value, message_v
 
             driver.get(f"{base_url}{contact_path}")
 
-            # Find the input fields by ID
-            label_text = "Name"
-            print("label_text success")
-            label_element = driver.find_element(By.XPATH, f'//*[text()="{label_text}"]')
-            print("label_element success")
+            # this to fix
+            label_element = finding_name_field()
+
             name_input = label_element.find_element(
                 By.XPATH, "./following-sibling::div//input"
             )
