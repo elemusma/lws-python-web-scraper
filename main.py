@@ -6,33 +6,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 def finding_name_field():
-    # Find the input fields by ID
-    label_text_first = "First Name"
-    label_text_full = "Full Name"
-    label_text = "Name"
-    print("label_text success")
-
-    try:
-        label_element = driver.find_element(
-            By.XPATH, f'//*[text()="{label_text_first}"]'
-        )
-    except NoSuchElementException:
-        try:
-            label_element = driver.find_element(
-                By.XPATH, f'//*[text()="{label_text_full}"]'
-            )
-        except NoSuchElementException:
-            try:
-                label_element = driver.find_element(
-                    By.XPATH, f'//*[text()="{label_text}"]'
-                )
-            except NoSuchElementException:
-                print(
-                    f"All three variations of label text '{label_text_first}' and '{label_text}' not found."
-                )
-    # Handle the case when both variations are not found
-
-    print("label_element success")
+    exit
 
 
 def fill_contact_form(base_url, contact_path, name_value, email_value, message_value):
@@ -53,22 +27,95 @@ def fill_contact_form(base_url, contact_path, name_value, email_value, message_v
 
             driver.get(f"{base_url}{contact_path}")
 
-            # this to fix
-            label_element = finding_name_field()
+            ########################################################################
+            # Start of finding name field
+
+            label_text_first = "First Name"
+            label_text_full = "Full Name"
+            label_text = "Name"
+            print("label_text success")
+
+            try:
+                label_element = driver.find_element(
+                    By.XPATH, f'//*[text()="{label_text_first}"]'
+                )
+            except NoSuchElementException:
+                try:
+                    label_element = driver.find_element(
+                        By.XPATH, f'//*[text()="{label_text_full}"]'
+                    )
+                except NoSuchElementException:
+                    try:
+                        label_element = driver.find_element(
+                            By.XPATH, f'//*[text()="{label_text}"]'
+                        )
+                    except NoSuchElementException:
+                        print(
+                            f"All three variations of label text '{label_text_first}' and '{label_text}' not found."
+                        )
+            # Handle the case when both variations are not found
+
+            print("label_element success")
 
             name_input = label_element.find_element(
                 By.XPATH, "./following-sibling::div//input"
             )
             print("name_input success")
 
+            ########################################################################
+
+            ########################################################################
+            # Start of finding email field
+
+            # label_email_first = "Email Address"
+            # label_email_full = "Enter Email"
+            label_email = "Email"
+            print("label_email success")
+
+            email_element = driver.find_element(
+                By.XPATH, f'//*[text()="{label_email}"]'
+            )
+
+            # try:
+            #     email_element = driver.find_element(
+            #         By.XPATH, f'//*[text()="{label_email_first}"]'
+            #     )
+            # except NoSuchElementException:
+            #     try:
+            #         email_element = driver.find_element(
+            #             By.XPATH, f'//*[text()="{label_email_full}"]'
+            #         )
+            #     except NoSuchElementException:
+            #         try:
+            #             email_element = driver.find_element(
+            #                 By.XPATH, f'//*[text()="{label_email}"]'
+            #             )
+            #         except NoSuchElementException:
+            #             print(
+            #                 f"All three variations of label text '{label_email_first}', '{label_email_full}', and '{label_email}' not found."
+            #             )
+            #             return  # Add a return statement to exit the function if the email field is not found
+
+            # Handle the case when both variations are not found
+            # print("email_element success")
+
+            email_input = email_element.find_element(
+                By.XPATH, "./following-sibling::div//input"
+            )
+            print(f"{email_input} success")
+
+            ########################################################################
+
             # name_input = driver.find_element(By.ID, "input_1_1")
-            email_input = driver.find_element(By.ID, "input_1_3")
+            # email_input = driver.find_element(By.ID, "input_1_3")
             message_input = driver.find_element(By.ID, "input_1_4")
             submit_input = driver.find_element(By.ID, "gform_submit_button_1")
 
             # Clear any existing text in the input fields
             name_input.clear()
+            print("name_input clear")
             email_input.clear()
+            print("email_input clear")
             message_input.clear()
 
             # Enter values into the input fields
@@ -97,5 +144,5 @@ fill_contact_form(
     contact_path,
     "Python",
     "python@gmail.com",
-    "This is a test of web scraping with Python. with function.",
+    "This is a test of web scraping with Python. with function. email element input",
 )
